@@ -5,7 +5,7 @@ spring:
   application:
     name: Euphoria_Ecommerce
   datasource:
-    url: jdbc:postgresql://localhost:5432/commercedb
+    url: jdbc:postgresql://localhost:5432/postgres?currentSchema=euphoria_ecommerce
     username: postgres
     password:
     driver-class-name: org.postgresql.Driver
