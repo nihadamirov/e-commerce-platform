@@ -9,6 +9,7 @@ spring:
     username: root
     password: AQp1Z7zDkt51OyHByamES99NmxJRciqD
     driver-class-name: org.postgresql.Driver
+
   jpa:
     hibernate:
       ddl-auto: update
@@ -17,16 +18,18 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
+
   mail:
     host: smtp.gmail.com
     port: 587
-    username: ""
-    password: ""
+    username: ${MAIL_USERNAME:j71848402@gmail.com}
+    password: ${MAIL_PASSWORD:xbjcmchtpqhcnzvx}
     properties:
       mail:
         smtp:
           auth: true
           starttls:
             enable: true
+
   jwt:
-    SECRET_KEY: "7ebe8d71e6ea4ae6192cb0a85e640221058c28adb6b5564b29f7faf8bc61b2f6"
+     SECRET_KEY: "7ebe8d71e6ea4ae6192cb0a85e640221058c28adb6b5564b29f7faf8bc61b2f6"
