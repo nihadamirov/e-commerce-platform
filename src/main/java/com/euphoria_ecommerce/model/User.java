@@ -24,10 +24,11 @@ import java.util.List;
 @EntityListeners(AuditingEntityListener.class)
 public class User implements UserDetails {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String email;
     private String password;
+
     @Enumerated(EnumType.STRING)
     private Role role;
     //    private boolean isEnabled;
@@ -35,6 +36,9 @@ public class User implements UserDetails {
     private LocalDateTime createDate;
     @LastModifiedDate
     private LocalDateTime updateDate;
+
+    @OneToMany(mappedBy = "user")
+    private List<Token> tokens;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

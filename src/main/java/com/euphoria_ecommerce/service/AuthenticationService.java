@@ -3,7 +3,10 @@ package com.euphoria_ecommerce.service;
 import com.euphoria_ecommerce.dto.LoginRequest;
 import com.euphoria_ecommerce.dto.RegisterRequest;
 import com.euphoria_ecommerce.exception.UserAlreadyExistsException;
+import com.euphoria_ecommerce.model.Token;
+import com.euphoria_ecommerce.model.TokenType;
 import com.euphoria_ecommerce.model.User;
+import com.euphoria_ecommerce.repository.TokenRepository;
 import com.euphoria_ecommerce.repository.UserRepository;
 import com.euphoria_ecommerce.security.AuthenticationResponse;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +27,8 @@ public class AuthenticationService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
+    private final TokenRepository tokenRepository;
+
 
     public AuthenticationResponse register(RegisterRequest request) {
         User user = new User();
@@ -34,8 +39,9 @@ public class AuthenticationService {
         user.setPassword(passwordEncoder.encode(request.password()));
         user.setRole(request.role());
         user = userRepository.save(user);
-        String token = jwtService.generateToken(user);
-        return new AuthenticationResponse(token);
+        String jwtToken = jwtService.generateToken(user);
+        saveUserToken(user, jwtToken);
+        return new AuthenticationResponse(jwtToken);
     }
 
     public boolean emailExists(String email) {
@@ -54,8 +60,10 @@ public class AuthenticationService {
                 )
         );
         User user = userRepository.findByEmail(request.email()).orElseThrow();
-        String token = jwtService.generateToken(user);
-        return new AuthenticationResponse(token);
+        String jwtToken = jwtService.generateToken(user);
+        revokeAllUserTokens(user);
+        saveUserToken(user, jwtToken);
+        return new AuthenticationResponse(jwtToken);
     }
 
 //    public User register(RegisterRequest request) {
@@ -89,4 +97,26 @@ public class AuthenticationService {
 //        userRepository.save(user);
 //        return "valid";
 //    }
+
+    private void revokeAllUserTokens(User user){
+        var validUserTokens = tokenRepository.findAllValidTokenByUser(user.getId());
+        if (validUserTokens.isEmpty())
+            return;
+        validUserTokens.forEach(token -> {
+            token.setExpired(true);
+            token.setRevoked(true);
+        });
+        tokenRepository.saveAll(validUserTokens);
+    }
+
+    private void saveUserToken(User user, String jwtToken) {
+        var token= Token.builder()
+                .user(user)
+                .token(jwtToken)
+                .tokenType(TokenType.BEARER)
+                .revoked(false)
+                .expired(false)
+                .build();
+        tokenRepository.save(token);
+    }
 }
