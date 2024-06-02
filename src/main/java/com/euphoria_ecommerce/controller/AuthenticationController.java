@@ -2,13 +2,17 @@ package com.euphoria_ecommerce.controller;
 
 import com.euphoria_ecommerce.dto.LoginRequest;
 import com.euphoria_ecommerce.dto.RegisterRequest;
+import com.euphoria_ecommerce.model.User;
+import com.euphoria_ecommerce.repository.UserRepository;
 import com.euphoria_ecommerce.security.AuthenticationResponse;
 import com.euphoria_ecommerce.service.AuthenticationService;
+import com.euphoria_ecommerce.service.UserDetailsServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -17,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 public class AuthenticationController {
     private final AuthenticationService authenticationService;
     private final ApplicationEventPublisher publisher;
+    private final UserRepository userRepository;
 
     @PostMapping("/register")
     public ResponseEntity<AuthenticationResponse> register(
@@ -29,8 +34,9 @@ public class AuthenticationController {
     public ResponseEntity<AuthenticationResponse> login(@RequestBody LoginRequest request) {
         return ResponseEntity.ok(authenticationService.authenticate(request));
     }
+}
 
-    //    @PostMapping("/register")
+//    @PostMapping("/register")
 //    public ResponseEntity<String> register(
 //            @RequestBody RegisterRequest request, final HttpServletRequest httpServletRequest
 //    ) {
@@ -55,6 +61,3 @@ public class AuthenticationController {
 //    public String applicationUrl(HttpServletRequest request) {
 //        return "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
 //    }
-
-
-}

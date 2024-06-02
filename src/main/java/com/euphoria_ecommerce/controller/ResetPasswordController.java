@@ -36,8 +36,13 @@ public class ResetPasswordController {
     @PostMapping("/change-password/{email}")
     public ResponseEntity<ResponseMessage> changePassword(@RequestBody ChangePassword changePassword,
                                                           @PathVariable String email) {
-        resetPasswordService.changePassword(changePassword, email);
-        ResponseMessage message = new ResponseMessage("Password changed successfully!");
-        return ResponseEntity.ok(message);
+        try {
+            resetPasswordService.changePassword(changePassword, email);
+            ResponseMessage message = new ResponseMessage("Password changed successfully!");
+            return ResponseEntity.ok(message);
+        } catch (RuntimeException ex) {
+            ResponseMessage message = new ResponseMessage(ex.getMessage());
+            return ResponseEntity.badRequest().body(message);
+        }
     }
 }
