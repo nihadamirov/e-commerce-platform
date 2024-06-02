@@ -16,6 +16,7 @@ import java.time.Instant;
 import java.util.Date;
 import java.util.Objects;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 @Service
 public class ResetPasswordService {
@@ -67,8 +68,15 @@ public class ResetPasswordService {
     }
 
     public void changePassword(ChangePassword changePassword, String email) {
-        if (!Objects.equals(changePassword.password(), changePassword.confirmPassword())) {
+        if (!changePassword.password().equals(changePassword.confirmPassword())) {
             throw new RuntimeException("Please enter the password again!");
+        }
+
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + email));
+
+        if (passwordEncoder.matches(changePassword.password(), user.getPassword())) {
+            throw new RuntimeException("The new password cannot be the same as the current password!");
         }
 
         String encodedPassword = passwordEncoder.encode(changePassword.password());
@@ -76,8 +84,8 @@ public class ResetPasswordService {
     }
 
     private String otpGenerator() {
-        Random rand = new Random();
-        return String.valueOf(rand.nextInt(100_000, 999_999));
+        ThreadLocalRandom rand = ThreadLocalRandom.current();
+        return String.valueOf(rand.nextInt(100000, 1000000));
     }
     }
 

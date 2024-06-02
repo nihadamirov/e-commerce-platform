@@ -2,7 +2,6 @@ package com.euphoria_ecommerce.model;
 
 import com.euphoria_ecommerce.enums.OrderStatus;
 import com.euphoria_ecommerce.enums.PaymentMethod;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
