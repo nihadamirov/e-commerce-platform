@@ -29,13 +29,11 @@ public class Rating {
     @LastModifiedDate
     private LocalDateTime updateDate;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "product_id", nullable = false)
-    @JsonIgnore
     private Product product;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
-    @JsonIgnore
     private User user;
 }
