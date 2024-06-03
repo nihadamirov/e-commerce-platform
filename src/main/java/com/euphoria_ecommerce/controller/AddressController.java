@@ -16,27 +16,27 @@ public class AddressController {
         this.addressService = addressService;
     }
 
-    @PostMapping("add/{userId}")
-    public ResponseEntity<AddressDto> addAddress(@PathVariable Long userId, @RequestBody AddressDto addressDto) {
-        AddressDto createAddress = addressService.addAddress(userId, addressDto);
+    @PostMapping("add/{email}")
+    public ResponseEntity<AddressDto> addAddress(@PathVariable String email, @RequestBody AddressDto addressDto) {
+        AddressDto createAddress = addressService.addAddress(email, addressDto);
         return ResponseEntity.ok(createAddress);
     }
 
-    @PostMapping("update/{userId}")
-    public ResponseEntity<AddressDto> updateAddress(@PathVariable Long userId, @RequestBody AddressDto addressDto) {
-        AddressDto updateAddress = addressService.updateAddress(userId, addressDto);
+    @PostMapping("update/{email}")
+    public ResponseEntity<AddressDto> updateAddress(@PathVariable String email, @RequestBody AddressDto addressDto) {
+        AddressDto updateAddress = addressService.updateAddress(email, addressDto);
         return ResponseEntity.ok(updateAddress);
     }
 
-    @DeleteMapping("delete/{userId}")
-    public ResponseEntity<AddressDto> deleteAddress(@PathVariable Long userId) {
-        addressService.deleteAddress(userId);
+    @DeleteMapping("delete/{email}")
+    public ResponseEntity<AddressDto> deleteAddress(@PathVariable String email) {
+        addressService.deleteAddress(email);
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("get/{userId}")
-    public ResponseEntity<AddressDto> getAddress(@PathVariable Long userId) {
-        AddressDto addressDto = addressService.getAddressByUserId(userId);
+    @GetMapping("get/{email}")
+    public ResponseEntity<AddressDto> getAddress(@PathVariable String email) {
+        AddressDto addressDto = addressService.getAddressByUserId(email);
         return ResponseEntity.ok(addressDto);
     }
 }

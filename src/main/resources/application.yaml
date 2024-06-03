@@ -5,7 +5,7 @@ spring:
   application:
     name: Euphoria_Ecommerce
   datasource:
-    url: jdbc:postgresql://dpg-cp5o4ko21fec73e95hp0-a/ecommerce_db_udo7
+    url: dbc:postgresql://dpg-cp5o4ko21fec73e95hp0-a/ecommerce_db_udo7
     username: root
     password: AQp1Z7zDkt51OyHByamES99NmxJRciqD
     driver-class-name: org.postgresql.Driver

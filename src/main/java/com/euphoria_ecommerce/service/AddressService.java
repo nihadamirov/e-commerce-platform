@@ -20,9 +20,9 @@ public class AddressService {
         this.userRepository = userRepository;
     }
 
-    public AddressDto addAddress(Long userId, AddressDto addressDto) {
+    public AddressDto addAddress(String email, AddressDto addressDto) {
 
-        User user = userRepository.findById(userId)
+        User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
         Address address = new Address();
@@ -44,8 +44,8 @@ public class AddressService {
         return addressDto;
     }
 
-    public AddressDto updateAddress(Long userId, AddressDto addressDto) {
-        User user = userRepository.findById(userId)
+    public AddressDto updateAddress(String email, AddressDto addressDto) {
+        User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
         Address address = user.getAddress();
@@ -66,8 +66,8 @@ public class AddressService {
         return addressDto;
     }
 
-    public void deleteAddress(Long userId) {
-        User user = userRepository.findById(userId)
+    public void deleteAddress(String email) {
+        User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
         Address address = user.getAddress();
@@ -79,8 +79,8 @@ public class AddressService {
         userRepository.save(user);
     }
 
-    public AddressDto getAddressByUserId(Long userId) {
-        User user = userRepository.findById(userId)
+    public AddressDto getAddressByUserId(String email) {
+        User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
         Address address = user.getAddress();
