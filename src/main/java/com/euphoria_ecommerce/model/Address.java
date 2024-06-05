@@ -1,5 +1,6 @@
 package com.euphoria_ecommerce.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,6 +27,7 @@ public class Address {
     private String postalCode;
     private String phone;
 
+    @JsonBackReference
     @OneToOne(mappedBy = "address")
     private User user;
 }
