@@ -34,16 +34,15 @@ public class AuthenticationController {
         return ResponseEntity.ok(authenticationService.authenticate(request));
     }
 
-    @GetMapping("/get")
+    @GetMapping("/")
     public UserResponseDTo getUserEmail(@RequestParam String email) {
         return userService.getUserByEmail(email);
-
     }
 
-    @GetMapping("/getentity")
-    public User getUserEntityByEmail(@RequestParam String email) {
-        return userService.getUserByEntityEmail(email);
-    }
+//    @GetMapping("/getentity")
+//    public User getUserEntityByEmail(@RequestParam String email) {
+//        return userService.getUserByEntityEmail(email);
+//    }
 }
 
 //    @PostMapping("/register")

@@ -1,11 +1,11 @@
 server:
-  port: 8080
+  port: 8081
 
 spring:
   application:
     name: Euphoria_Ecommerce
   datasource:
-    url: jdbc:postgresql://dpg-cp5o4ko21fec73e95hp0-a/ecommerce_db_udo7 #jdbc:postgresql://localhost:5432/ecommerce_db
+    url:  jdbc:postgresql://localhost:5432/ecommerce_db #jdbc:postgresql://dpg-cp5o4ko21fec73e95hp0-a/ecommerce_db_udo7
     username: root #postgres
     password:  AQp1Z7zDkt51OyHByamES99NmxJRciqD #2424
     driver-class-name: org.postgresql.Driver
