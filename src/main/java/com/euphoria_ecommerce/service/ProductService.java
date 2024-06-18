@@ -23,9 +23,9 @@ public class ProductService {
     }
 
     public Product add(Product product) {
-        for (Price price : product.getPrice()) {
-            price.setProduct(product);
-        }
+//        for (Price price : product.getPrice()) {
+//            price.setProduct(product);
+//        }
         return productRepository.save(product);
     }
 
