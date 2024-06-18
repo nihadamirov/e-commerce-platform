@@ -23,8 +23,10 @@ public class AddToCart {
     private Integer id;
     private Integer quantity;
     private Integer shipping;
-    private Integer addedTimePrice;
-
+    private Double addedTimePrice;
+    private Double totalPrice;
+//    private Integer subtotal;
+//    private Integer grandTotal;
     @CreatedDate
     private LocalDateTime createDate;
     @LastModifiedDate

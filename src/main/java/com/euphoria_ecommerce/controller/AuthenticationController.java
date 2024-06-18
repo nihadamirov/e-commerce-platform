@@ -2,17 +2,15 @@ package com.euphoria_ecommerce.controller;
 
 import com.euphoria_ecommerce.dto.LoginRequest;
 import com.euphoria_ecommerce.dto.RegisterRequest;
+import com.euphoria_ecommerce.dto.UserResponseDTo;
 import com.euphoria_ecommerce.model.User;
 import com.euphoria_ecommerce.repository.UserRepository;
 import com.euphoria_ecommerce.security.AuthenticationResponse;
 import com.euphoria_ecommerce.service.AuthenticationService;
-import com.euphoria_ecommerce.service.UserDetailsServiceImpl;
-import jakarta.servlet.http.HttpServletRequest;
+import com.euphoria_ecommerce.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -22,6 +20,7 @@ public class AuthenticationController {
     private final AuthenticationService authenticationService;
     private final ApplicationEventPublisher publisher;
     private final UserRepository userRepository;
+    private final UserService userService;
 
     @PostMapping("/register")
     public ResponseEntity<AuthenticationResponse> register(
@@ -34,6 +33,16 @@ public class AuthenticationController {
     public ResponseEntity<AuthenticationResponse> login(@RequestBody LoginRequest request) {
         return ResponseEntity.ok(authenticationService.authenticate(request));
     }
+
+    @GetMapping("/")
+    public UserResponseDTo getUserEmail(@RequestParam String email) {
+        return userService.getUserByEmail(email);
+    }
+
+//    @GetMapping("/getentity")
+//    public User getUserEntityByEmail(@RequestParam String email) {
+//        return userService.getUserByEntityEmail(email);
+//    }
 }
 
 //    @PostMapping("/register")

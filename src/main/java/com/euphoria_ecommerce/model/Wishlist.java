@@ -22,7 +22,7 @@ public class Wishlist {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private Integer quantity;
-
+    private Double totalPrice;
     @CreatedDate
     private LocalDateTime createDate;
     @LastModifiedDate
