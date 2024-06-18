@@ -26,7 +26,7 @@ public class Product {
     @Enumerated(EnumType.STRING)
     private Category category;
 
-    @JsonManagedReference
+//    @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL)
     private List<Price> price;
 

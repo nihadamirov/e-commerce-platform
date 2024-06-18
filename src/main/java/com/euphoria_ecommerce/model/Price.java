@@ -1,6 +1,7 @@
 package com.euphoria_ecommerce.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jdk.jfr.Enabled;
 import lombok.AllArgsConstructor;
@@ -19,9 +20,10 @@ public class Price {
     private String currency;
     private Double amount;
 
-    @JsonBackReference
-    @ManyToOne(cascade = CascadeType.ALL)
-    private Product product;
+//    @ManyToOne(cascade = CascadeType.ALL)
+//    @JsonBackReference
+//    @JsonIgnore
+//    private Product product;
 
 
 }

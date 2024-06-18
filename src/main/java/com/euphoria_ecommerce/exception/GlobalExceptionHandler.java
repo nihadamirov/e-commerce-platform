@@ -17,7 +17,40 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ResponseMessage> handleUserAlreadyExistsException(UserAlreadyExistsException exception) {
         return new ResponseEntity<>(new ResponseMessage(exception.getMessage()), HttpStatus.CONFLICT);
     }
-
+    @ExceptionHandler(ProductNotFoundException.class)
+    public ResponseEntity<ResponseMessage> handleProductNotFoundException(ProductNotFoundException exception) {
+        return new ResponseEntity<>(new ResponseMessage(exception.getMessage()), HttpStatus.NOT_FOUND);
+    }
+//    @ExceptionHandler(UserNotFoundException.class)
+//    public ResponseEntity<ResponseMessage> handleUserNotFoundException(UsernameNotFoundException exception) {
+//        return new ResponseEntity<>(new ResponseMessage(exception.getMessage()), HttpStatus.NOT_FOUND);
+//    }
+    @ExceptionHandler({UserNotFoundException.class})
+    public ResponseEntity<Object> handleUserNotFoundException(UserNotFoundException exception) {
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(exception.getMessage());
+    }
+    @ExceptionHandler(RatingNotFoundException.class)
+    public ResponseEntity<ResponseMessage> handleRatingNotFoundException(RatingNotFoundException exception) {
+        return new ResponseEntity<>(new ResponseMessage(exception.getMessage()), HttpStatus.NOT_FOUND);
+    }
+    @ExceptionHandler(OrderNotFoundException.class)
+    public ResponseEntity<ResponseMessage> handleOrderNotFoundException(OrderNotFoundException exception) {
+        return new ResponseEntity<>(new ResponseMessage(exception.getMessage()), HttpStatus.NOT_FOUND);
+    }
+    @ExceptionHandler(AddToCartNotFoundException.class)
+    public ResponseEntity<ResponseMessage> handleAddToCartNotFoundException(AddToCartNotFoundException exception) {
+        return new ResponseEntity<>(new ResponseMessage(exception.getMessage()), HttpStatus.NOT_FOUND);
+    }
+    @ExceptionHandler(ViewedProductNotFoundException.class)
+    public ResponseEntity<ResponseMessage> handleViewedProductNotFoundException(ViewedProductNotFoundException exception) {
+        return new ResponseEntity<>(new ResponseMessage(exception.getMessage()), HttpStatus.NOT_FOUND);
+    }
+    @ExceptionHandler(WishlistNotFoundException.class)
+    public ResponseEntity<ResponseMessage> handleRatingNotFoundException(WishlistNotFoundException exception) {
+        return new ResponseEntity<>(new ResponseMessage(exception.getMessage()), HttpStatus.NOT_FOUND);
+    }
     @ExceptionHandler(UsernameNotFoundException.class)
     public ResponseEntity<ResponseMessage> handleUsernameNotFoundException(UsernameNotFoundException ex) {
         return new ResponseEntity<>(new ResponseMessage(ex.getMessage()), HttpStatus.NOT_FOUND);
