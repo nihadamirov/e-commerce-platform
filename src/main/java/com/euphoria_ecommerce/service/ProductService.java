@@ -1,12 +1,10 @@
 package com.euphoria_ecommerce.service;
 
-import com.euphoria_ecommerce.dto.AddressDto;
-import com.euphoria_ecommerce.model.Price;
 import com.euphoria_ecommerce.model.Product;
 import com.euphoria_ecommerce.repository.PriceRepository;
 import com.euphoria_ecommerce.repository.ProductRepository;
+import io.jsonwebtoken.lang.Arrays;
 import lombok.extern.slf4j.Slf4j;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,7 +24,16 @@ public class ProductService {
 //        for (Price price : product.getPrice()) {
 //            price.setProduct(product);
 //        }
+        if (!isSizeValid(product.getSize())) {
+            throw new RuntimeException("Size can't different from XS,S,M,L,XL,XXL");
+        }
         return productRepository.save(product);
+    }
+
+    private boolean isSizeValid(String size) {
+
+        List<String> listOfSize = Arrays.asList(new String[]{"XS", "S", "XL", "M", "L", "XXL"});
+        return listOfSize.contains(size);
     }
 
     public Product update(Product product, Long id) {
