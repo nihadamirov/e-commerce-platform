@@ -19,7 +19,9 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+
     private String productName;
+
     private String size;
     private String color;
 

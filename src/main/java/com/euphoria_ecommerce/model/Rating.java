@@ -21,9 +21,11 @@ public class Rating {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     @Min(value = 0, message = "Rating must be at least 0")
     @Max(value = 10, message = "Rating must be at most 10")
     private Integer rating;
+
     @CreatedDate
     private LocalDateTime createDate;
     @LastModifiedDate
