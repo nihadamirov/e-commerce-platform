@@ -29,6 +29,8 @@ public class User implements UserDetails {
     private Long id;
     private String email;
     private String password;
+    private String phone;
+    private String fullName;
 
     @Enumerated(EnumType.STRING)
     private Role role;
@@ -75,5 +77,13 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                '}';
     }
 }

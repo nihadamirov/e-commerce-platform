@@ -2,8 +2,8 @@ package com.euphoria_ecommerce.service;
 
 import com.euphoria_ecommerce.dto.AddressDto;
 import com.euphoria_ecommerce.dto.UserResponseDTo;
+import com.euphoria_ecommerce.dto.UserUpdateDto;
 import com.euphoria_ecommerce.model.Address;
-import com.euphoria_ecommerce.model.Token;
 import com.euphoria_ecommerce.model.User;
 import com.euphoria_ecommerce.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -21,40 +21,67 @@ public class UserService {
 
     public UserResponseDTo getUserByEmail(String email) {
 
-        User user = userRepository.findByEmail(email).get();
-//        for(Token token: user.getTokens()) {
-//            log.info("Token..!");
-//            log.info(token.getToken());
-//        }
-        //user.getTokens()
-        AddressDto addressDto = null;
+        User user = userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("User not found"));
 
+        AddressDto addressDto = null;
 
         if (user.getAddress() != null) {
             Address address = user.getAddress();
             addressDto = new AddressDto(
                     address.getRegion(),
                     address.getState(),
-                    null,
-                    null
-                    ,null,
-                    null,
-                    null,
-                    null
-                    );
+                    address.getCity(),
+                    address.getStreet(),
+                    address.getCompanyName(),
+                    address.getHomeType(),
+                    address.getPhone(),
+                    address.getPostalCode()
+            );
         }
 
-        UserResponseDTo userResponseDTo = new UserResponseDTo(
+        return new UserResponseDTo(
                 user.getId(),
                 user.getEmail(),
+                user.getFullName(),
+                user.getPhone(),
                 addressDto
         );
-
-        return userResponseDTo;
     }
 
+    public UserResponseDTo updateUser(UserUpdateDto userUpdateDto, String email) {
+
+        User user = userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("User not found"));
+
+        user.setPhone(userUpdateDto.phone());
+        user.setFullName(userUpdateDto.fullName());
+
+        User updatedUser = userRepository.save(user);
+
+        AddressDto addressDto = null;
+        if (updatedUser.getAddress() != null) {
+            Address address = updatedUser.getAddress();
+            addressDto = new AddressDto(
+                    address.getRegion(),
+                    address.getState(),
+                    address.getCity(),
+                    address.getStreet(),
+                    address.getCompanyName(),
+                    address.getHomeType(),
+                    address.getPhone(),
+                    address.getPostalCode()
+            );
+        }
+
+        return new UserResponseDTo(
+                updatedUser.getId(),
+                updatedUser.getEmail(),
+                updatedUser.getFullName(),
+                updatedUser.getPhone(),
+                addressDto
+        );
+    }
 
     public User getUserByEntityEmail(String email) {
-        return  userRepository.findByEmail(email).get();
+        return userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("User not found"));
     }
 }
