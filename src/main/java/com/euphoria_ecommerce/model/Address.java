@@ -2,32 +2,35 @@ package com.euphoria_ecommerce.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.FieldDefaults;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "address")
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class Address {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long id;
+    Long id;
 
-    private String region;
-    private String state;
-    private String city;
-    private String street;
-    private String companyName;
-    private String homeType;
-    private String postalCode;
-    private String phone;
+    String region;
+    String state;
+    String city;
+    String street;
+    String companyName;
+    String homeType;
+    String postalCode;
+    String phone;
 
     @JsonBackReference
     @OneToOne(mappedBy = "address")
-    private User user;
+    User user;
 }
