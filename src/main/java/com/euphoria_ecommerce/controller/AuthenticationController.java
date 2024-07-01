@@ -3,6 +3,7 @@ package com.euphoria_ecommerce.controller;
 import com.euphoria_ecommerce.dto.LoginRequest;
 import com.euphoria_ecommerce.dto.RegisterRequest;
 import com.euphoria_ecommerce.dto.UserResponseDTo;
+import com.euphoria_ecommerce.dto.UserUpdateDto;
 import com.euphoria_ecommerce.model.User;
 import com.euphoria_ecommerce.repository.UserRepository;
 import com.euphoria_ecommerce.security.AuthenticationResponse;
@@ -37,6 +38,11 @@ public class AuthenticationController {
     @GetMapping("/")
     public UserResponseDTo getUserEmail(@RequestParam String email) {
         return userService.getUserByEmail(email);
+    }
+
+    @PutMapping("/update/{email}")
+    public UserResponseDTo userUpdate(@RequestBody UserUpdateDto userUpdateDto, @PathVariable String email) {
+        return userService.updateUser(userUpdateDto, email);
     }
 
 //    @GetMapping("/getentity")
