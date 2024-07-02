@@ -93,7 +93,6 @@ public class OrderService {
 
         return modelMapper.map(orderRepository.save(foundedOrder), OrderDto.class);
     }
-
     private OrderDto convertEntityToDto(Order order) {
         modelMapper.getConfiguration()
                 .setMatchingStrategy(MatchingStrategies.LOOSE);
