@@ -35,7 +35,7 @@ public class AddToCartController {
         return new ResponseEntity<>(addToCartService.updateAddToCart(id, addToCart), HttpStatus.CREATED);
     }
     @DeleteMapping("/delete/{id}")
-    private ResponseEntity<String>deleteAddToCart(@PathVariable int id){
+    public ResponseEntity<String>deleteAddToCart(@PathVariable int id){
         addToCartService.deleteAddToCart(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
