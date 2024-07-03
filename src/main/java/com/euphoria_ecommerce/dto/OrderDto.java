@@ -19,6 +19,7 @@ public class OrderDto {
     private Integer orderNumber;
     private Integer quantity;
     @JsonFormat(shape = JsonFormat.Shape.STRING)
+    @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     private LocalDateTime orderDate;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private Date deliveryDate;
