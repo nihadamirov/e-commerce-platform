@@ -30,8 +30,8 @@ public class RecentlyViewedProductsController {
         return new ResponseEntity<>(viewedProductsService.createViewedProduct(viewedProducts), HttpStatus.CREATED);
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<RecentlyViewedProductsDto> updateViewedProduct(@PathVariable int id, @RequestBody RecentlyViewedProductsDto viewedProducts) {
-        return new ResponseEntity<>(viewedProductsService.updateViewedProducts(id, viewedProducts), HttpStatus.CREATED);
-    }
+//    @PutMapping("/update/{id}")
+//    public ResponseEntity<RecentlyViewedProductsDto> updateViewedProduct(@PathVariable int id, @RequestBody RecentlyViewedProductsDto viewedProducts) {
+//        return new ResponseEntity<>(viewedProductsService.updateViewedProducts(id, viewedProducts), HttpStatus.CREATED);
+//    }
 }

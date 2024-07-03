@@ -48,25 +48,25 @@ public class RecentlyViewedProductsService {
         viewedProducts.setId(viewedProductsDto.getId());
         viewedProducts.setProduct(product);
         viewedProducts.setUser(user);
-        viewedProducts.setViewedAt(viewedProductsDto.getViewedAt());
+//        viewedProducts.setViewedAt(viewedProductsDto.getViewedAt());
         return modelMapper.map(viewedProductsRepository.save(viewedProducts), RecentlyViewedProductsDto.class);
     }
 
-    public RecentlyViewedProductsDto updateViewedProducts(int id, RecentlyViewedProductsDto viewedProductsDto) {
-        RecentlyViewedProducts foundedProduct = viewedProductsRepository.findById(id)
-                .orElseThrow(() -> new ViewedProductNotFoundException("Viewed product not  found with id: " + id));
-
-        Product product = productRepository.findById(viewedProductsDto.getProductId())
-                .orElseThrow(() -> new ProductNotFoundException("Product not found with id:" + viewedProductsDto.getProductId()));
-        User user = userRepository.findById(viewedProductsDto.getUserId())
-                .orElseThrow(() -> new UserNotFoundException("User not found with id: " + viewedProductsDto.getUserId()));
-
-        foundedProduct.setProduct(product);
-        foundedProduct.setUser(user);
-        foundedProduct.setViewedAt(viewedProductsDto.getViewedAt());
-        return modelMapper.map(viewedProductsRepository.save(foundedProduct), RecentlyViewedProductsDto.class);
-
-    }
+//    public RecentlyViewedProductsDto updateViewedProducts(int id, RecentlyViewedProductsDto viewedProductsDto) {
+//        RecentlyViewedProducts foundedProduct = viewedProductsRepository.findById(id)
+//                .orElseThrow(() -> new ViewedProductNotFoundException("Viewed product not  found with id: " + id));
+//
+//        Product product = productRepository.findById(viewedProductsDto.getProductId())
+//                .orElseThrow(() -> new ProductNotFoundException("Product not found with id:" + viewedProductsDto.getProductId()));
+//        User user = userRepository.findById(viewedProductsDto.getUserId())
+//                .orElseThrow(() -> new UserNotFoundException("User not found with id: " + viewedProductsDto.getUserId()));
+//
+//        foundedProduct.setProduct(product);
+//        foundedProduct.setUser(user);
+////        foundedProduct.setViewedAt(viewedProductsDto.getViewedAt());
+//        return modelMapper.map(viewedProductsRepository.save(foundedProduct), RecentlyViewedProductsDto.class);
+//
+//    }
 
     private RecentlyViewedProductsDto convertEntityToDto(RecentlyViewedProducts viewedProducts) {
         modelMapper.getConfiguration()

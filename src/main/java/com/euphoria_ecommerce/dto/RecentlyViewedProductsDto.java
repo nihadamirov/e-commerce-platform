@@ -16,6 +16,7 @@ public class RecentlyViewedProductsDto {
     private Integer id;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING)
+    @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     private LocalDateTime viewedAt;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
