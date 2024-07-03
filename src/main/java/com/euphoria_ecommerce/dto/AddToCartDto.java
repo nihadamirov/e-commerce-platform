@@ -25,6 +25,7 @@ public class AddToCartDto {
 //    @Schema(accessMode = Schema.AccessMode.READ_ONLY)
 //    private Integer grandTotal;
     @JsonFormat(shape = JsonFormat.Shape.STRING)
+    @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     private LocalDateTime createDate;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
     @Schema(accessMode = Schema.AccessMode.READ_ONLY)

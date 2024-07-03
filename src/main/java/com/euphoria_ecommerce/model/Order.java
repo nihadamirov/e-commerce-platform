@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -26,6 +27,7 @@ public class Order {
     private Integer id;
     private Integer orderNumber;
     private Integer quantity;
+    @CreatedDate
     private LocalDateTime orderDate;
     private Date deliveryDate;
     private Double totalPrice;

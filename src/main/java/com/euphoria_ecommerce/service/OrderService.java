@@ -1,6 +1,7 @@
 package com.euphoria_ecommerce.service;
 
 import com.euphoria_ecommerce.dto.OrderDto;
+import com.euphoria_ecommerce.enums.OrderStatus;
 import com.euphoria_ecommerce.exception.OrderNotFoundException;
 import com.euphoria_ecommerce.exception.ProductNotFoundException;
 import com.euphoria_ecommerce.exception.UserNotFoundException;
@@ -48,7 +49,7 @@ public class OrderService {
 
         order.setId(order.getId());
         order.setOrderNumber(orderDto.getOrderNumber());
-        order.setOrderDate(orderDto.getOrderDate());
+//        order.setOrderDate(orderDto.getOrderDate());
         order.setDeliveryDate(orderDto.getDeliveryDate());
         order.setOrderStatus(orderDto.getOrderStatus());
         order.setPaymentMethod(orderDto.getPaymentMethod());
@@ -77,7 +78,7 @@ public class OrderService {
                 .orElseThrow(() -> new UserNotFoundException("User not found with id: " + orderDto.getUserId()));
 
         foundedOrder.setOrderNumber(orderDto.getOrderNumber());
-        foundedOrder.setOrderDate(orderDto.getOrderDate());
+//        foundedOrder.setOrderDate(orderDto.getOrderDate());
         foundedOrder.setDeliveryDate(orderDto.getDeliveryDate());
         foundedOrder.setOrderStatus(orderDto.getOrderStatus());
         foundedOrder.setPaymentMethod(orderDto.getPaymentMethod());
@@ -93,6 +94,13 @@ public class OrderService {
 
         return modelMapper.map(orderRepository.save(foundedOrder), OrderDto.class);
     }
+
+    public List<OrderDto> getOrdersByStatus(OrderStatus orderStatus){
+        return orderRepository.findByOrderStatus(orderStatus)
+                .stream().map(this::convertEntityToDto)
+                .collect(Collectors.toList());
+    }
+
     private OrderDto convertEntityToDto(Order order) {
         modelMapper.getConfiguration()
                 .setMatchingStrategy(MatchingStrategies.LOOSE);

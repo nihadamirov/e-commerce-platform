@@ -1,6 +1,7 @@
 package com.euphoria_ecommerce.controller;
 
 import com.euphoria_ecommerce.dto.OrderDto;
+import com.euphoria_ecommerce.enums.OrderStatus;
 import com.euphoria_ecommerce.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -23,6 +24,10 @@ public class OrderController {
     @GetMapping("/")
     public ResponseEntity<List<OrderDto>> getAllOrders() {
         return new ResponseEntity<>(orderService.getAllOrders(), HttpStatus.OK);
+    }
+    @GetMapping("/orderstatus{orderStatus}")
+    public ResponseEntity<List<OrderDto>> getOrdersByStatus(@PathVariable OrderStatus orderStatus) {
+        return new ResponseEntity<>(orderService.getOrdersByStatus(orderStatus), HttpStatus.OK);
     }
 
     @PostMapping("/new")
