@@ -1,6 +1,7 @@
 package com.euphoria_ecommerce.model;
 
 import com.euphoria_ecommerce.enums.Gender;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -29,6 +30,7 @@ public class Product {
     @Enumerated(value = EnumType.STRING)
     private Gender gender;
 
+    @JsonIgnore
     @JsonManagedReference
     @ManyToOne
     private Category category;
