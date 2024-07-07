@@ -2,6 +2,7 @@ package com.euphoria_ecommerce.model;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.annotation.security.DenyAll;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -21,6 +22,7 @@ public class Category {
 
     private String name;
 
+    @JsonIgnore
     @JsonBackReference
     @ManyToOne
     private Product product;
