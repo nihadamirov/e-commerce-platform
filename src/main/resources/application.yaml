@@ -1,11 +1,12 @@
 server:
-  port: 8080
+  port: 8081
 
 spring:
   application:
     name: Euphoria_Ecommerce
   datasource:
-    url: jdbc:postgresql://dpg-cp5o4ko21fec73e95hp0-a/ecommerce_db_udo7
+    #url: jdbc:postgresql://dpg-cp5o4ko21fec73e95hp0-a/ecommerce_db_udo7
+    url: jdbc:postgresql://dpg-cp5o4ko21fec73e95hp0-a.oregon-postgres.render.com/ecommerce_db_udo7
     username: root
     password: AQp1Z7zDkt51OyHByamES99NmxJRciqD
     driver-class-name: org.postgresql.Driver
@@ -30,6 +31,9 @@ spring:
           auth: true
           starttls:
             enable: true
+
+  stripe:
+    secretKey: your_stripe_secret_key_here
 
   jwt:
      SECRET_KEY: "7ebe8d71e6ea4ae6192cb0a85e640221058c28adb6b5564b29f7faf8bc61b2f6"

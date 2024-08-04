@@ -46,6 +46,11 @@
             <artifactId>modelmapper</artifactId>
             <version>3.2.0</version>
         </dependency>
+        <dependency>
+            <groupId>com.stripe</groupId>
+            <artifactId>stripe-java</artifactId>
+            <version>20.41.0</version>
+        </dependency>
 
         <dependency>
             <groupId>org.postgresql</groupId>
