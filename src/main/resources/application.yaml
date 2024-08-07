@@ -31,10 +31,10 @@ spring:
           auth: true
           starttls:
             enable: true
-  api:
-   stripe:
+  jwt:
+    SECRET_KEY: "7ebe8d71e6ea4ae6192cb0a85e640221058c28adb6b5564b29f7faf8bc61b2f6"
+
+api:
+  stripe:
     key: sk_test_51Pk9tbHG9CLUlOWjmBrKv6NO3lu5y897yVqmEyYpixaV9nYlYG6QSVqQjXo0rImyoa7ZqhF7jCeqtcK77KxB97rl00ECGJMznN
     #your_stripe_secret_key_here
-
-  jwt:
-     SECRET_KEY: "7ebe8d71e6ea4ae6192cb0a85e640221058c28adb6b5564b29f7faf8bc61b2f6"

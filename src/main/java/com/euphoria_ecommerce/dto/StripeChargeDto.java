@@ -11,7 +11,7 @@ public class StripeChargeDto {
     private String stripeToken;
     private String username;
     private Double amount;
-    private String success;
+    private boolean success;
     private String message;
     private String chargeId;
     Map<String, Object> additionalInfo = new HashMap<>();
