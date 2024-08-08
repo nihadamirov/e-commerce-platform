@@ -36,6 +36,7 @@ public class StripePaymentService {
             card.put("exp_month", Integer.parseInt(model.getExpMonth()));
             card.put("exp_year", Integer.parseInt(model.getExpYear()));
             card.put("cvc", model.getCvc());
+            card.put("username", model.getUserName());
 
             Map<String, Object> params = new HashMap<>();
             params.put("card", card);

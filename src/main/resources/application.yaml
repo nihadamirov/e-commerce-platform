@@ -1,12 +1,12 @@
 server:
-  port: 8081
+  port: 808
 
 spring:
   application:
     name: Euphoria_Ecommerce
   datasource:
-    #url: jdbc:postgresql://dpg-cp5o4ko21fec73e95hp0-a/ecommerce_db_udo7
-    url: jdbc:postgresql://dpg-cp5o4ko21fec73e95hp0-a.oregon-postgres.render.com/ecommerce_db_udo7
+    url: jdbc:postgresql://dpg-cp5o4ko21fec73e95hp0-a/ecommerce_db_udo7
+#    url: jdbc:postgresql://dpg-cp5o4ko21fec73e95hp0-a.oregon-postgres.render.com/ecommerce_db_udo7
     username: root
     password: AQp1Z7zDkt51OyHByamES99NmxJRciqD
     driver-class-name: org.postgresql.Driver
@@ -36,5 +36,4 @@ spring:
 
 api:
   stripe:
-    key: sk_test_51Pk9tbHG9CLUlOWjmBrKv6NO3lu5y897yVqmEyYpixaV9nYlYG6QSVqQjXo0rImyoa7ZqhF7jCeqtcK77KxB97rl00ECGJMznN
-    #your_stripe_secret_key_here
+    key: your_stripe_secret_key_here

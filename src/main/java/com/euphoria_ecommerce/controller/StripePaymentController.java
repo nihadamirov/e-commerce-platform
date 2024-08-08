@@ -6,7 +6,7 @@ import com.euphoria_ecommerce.service.StripePaymentService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/public/stripe")
+@RequestMapping("/stripe")
 public class StripePaymentController {
 
     private final StripePaymentService stripePaymentService;
