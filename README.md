@@ -1,110 +1,80 @@
-# Euphoria E-commerce
+# E-commerce Platform
 
-Euphoria E-commerce is a comprehensive e-commerce platform designed to provide a robust solution for managing products, user accounts, and interactions within an online shopping environment. Built using Java, Spring Boot, and PostgreSQL, it offers a range of features essential for a modern e-commerce application.
+Euphoria E-commerce is a comprehensive e-commerce platform designed to provide a seamless online shopping experience. The platform includes user authentication, product management, a shopping cart, order management, and payment integration using Stripe. Built with Java, Spring Boot, and PostgreSQL, it leverages Docker and Docker Compose for containerization.
+
+## Table of Contents
+
+1. [Features](#features)
+2. [Installation](#installation)
+3. [Configuration](#configuration)
+4. [Usage](#usage)
+5. [Testing](#testing)
 
 ## Features
 
-### Product Management
-- **CRUD Operations**: Manage products including creation, retrieval, updating, and deletion.
-- **Product Attributes**: Store details such as name, size, color, category, images, and pricing.
-- **Price Management**: Track product prices over time with support for multiple currencies.
+- **Product Management**: CRUD operations for products, including attributes like name, size, color, category, and pricing. Multi-currency support and price management over time.
+- **User Management**: User registration with email verification, secure authentication with JWT, and password recovery.
+- **Shopping Cart**: Manage product selection and quantities, with the ability to add or remove items.
+- **Order Management**: Full lifecycle management including order creation, tracking, and history.
+- **Payment Integration**: Integrated with Stripe for handling payments.
 
-### User Management
-- **Registration**: New users can register accounts with email verification.
-- **Authentication**: Secure user authentication and authorization using JWT (JSON Web Tokens).
-- **Password Recovery**: Enable users to reset passwords via email with OTP (One-Time Password) verification.
-
-### Interaction and Engagement
-- **Product Ratings**: Users can rate products on a scale of 0 to 10.
-- **Recently Viewed Products**: Keep track of products users have recently viewed.
-- **Wishlist**: Allow users to add products to their wishlist for future purchase consideration.
-
-### Security and Authentication
-- **JWT Token-Based Authentication**: Provides secure authentication mechanism using JWT tokens.
-- **Role-Based Access Control**: Implement different levels of access based on user roles (admin, user).
-
-### Additional Features
-- **Email Notifications**: Integration with SMTP for sending registration and password recovery emails.
-- **Audit Logging**: Track important actions and changes with auditing and logging features.
-- **Responsive Design**: Designed with responsiveness in mind to ensure compatibility across devices.
-
-## Getting Started
+## Installation
 
 ### Prerequisites
 
-Ensure you have the following installed on your machine:
+- Java 17 or later
+- Maven 3.6 or later
+- Docker
+- Docker Compose
 
-- Java 17
-- Maven 3.8.5
-- PostgreSQL
+### Steps
 
-### Installation
-
-1. **Clone the repository:**
+1. Clone the repository:
    ```bash
    git clone https://github.com/nihadamirov/Euphoria_Ecommerce.git
+   ```
+
+2. Navigate to the project directory:
+   ```bash
    cd Euphoria_Ecommerce
    ```
 
-2. **Set up the database:**
-    - Create a PostgreSQL database and update the configuration in `application.yml`:
-      ```yaml
-      spring:
-        datasource:
-          url: jdbc:postgresql://<database-url>:5432/<database-name>
-          username: <database-username>
-          password: <database-password>
-      ```
-
-3. **Configure email settings:**
-    - Update SMTP settings in `application.yml` for sending emails:
-      ```yaml
-      mail:
-        host: smtp.gmail.com
-        port: 587
-        username: <your-email>
-        password: <your-email-password>
-        properties:
-          mail:
-            smtp:
-              auth: true
-              starttls:
-                enable: true
-      ```
-
-4. **Build and run the application:**
+3. Build the project using Maven:
    ```bash
-   mvn clean package -DskipTests
-   java -jar target/Euphoria_Ecommerce-0.0.1-SNAPSHOT.jar
+   mvn clean install
    ```
 
-The application will start on `localhost:8080`.
-
-### Docker
-
-Alternatively, you can use Docker to run the application:
-
-1. **Build Docker image:**
+4. Start the application using Docker Compose:
    ```bash
-   docker build -t euphoria-ecommerce .
+   docker-compose up
    ```
 
-2. **Run Docker container:**
-   ```bash
-   docker run -p 8080:8080 euphoria-ecommerce
-   ```
+## Configuration
 
-## API Documentation
+Update the `application.properties` file with your database and Stripe credentials:
 
-The application provides RESTful API endpoints for interacting with various functionalities such as user management, product management, ratings, and wishlist. Explore the API documentation provided by Swagger UI:
+```properties
+spring.datasource.url=jdbc:postgresql://localhost:5432/euphoria
+spring.datasource.username=your_db_username
+spring.datasource.password=your_db_password
 
-- Swagger UI: [http://localhost:8080/swagger-ui/](http://localhost:8080/swagger-ui/)
+stripe.api.key=your_stripe_secret_key
+jwt.SECRET_KEY=your_secret_key
+```
 
-## Security
+## Usage
 
-Ensure to keep your `SECRET_KEY` for JWT token generation secure. It is defined in `application.yml`.
+1. Open your browser and navigate to `http://localhost:8080` to access the application.
+2. Register a new user and verify the email.
+3. Log in and start exploring the product catalog.
+4. Add products to your cart and proceed to checkout to complete a purchase.
 
-## Contributing
+## Testing
 
-Contributions are welcome! If you find any issues or have suggestions for improvements, please feel free to fork the repository and submit pull requests.
+Run unit and integration tests using Maven:
 
+```bash
+mvn test
+```
+
+For more detailed test coverage and results, check the `target/site` directory.
